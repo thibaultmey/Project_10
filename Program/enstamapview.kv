@@ -1,0 +1,12 @@
+#:import Mapview kivy.garden.mapview.MapView
+
+<EnstaMapView>:
+    lat: 48.710640
+    lon: 2.219027
+    zoom: 16
+    on_zoom:
+        self.zoom = 16 if self.zoom < 16 else self.zoom
+    on_lat:
+        self.start_getting_locations_in_fov()
+    on_lon:
+        self.start_getting_locations_in_fov()
