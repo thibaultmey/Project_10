@@ -3,6 +3,7 @@ from enstamapview import EnstaMapView
 import sqlite3
 import pandas
 from searchpopupmenu import SearchPopupMenu
+from gpshelper import GpsHelper
 
 class MainApp(MDApp):
     connection = None
@@ -10,6 +11,11 @@ class MainApp(MDApp):
     search_menu = None
 
     def on_start(self):
+        self.theme_cls.primary_palette = 'Red'
+
+        #initialize gps
+        GpsHelper().run()
+
         # Connect to database
         self.connection = sqlite3.connect("locations.db")
         self.cursor = self.connection.cursor()

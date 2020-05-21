@@ -4,7 +4,6 @@ from kivy.network.urlrequest import UrlRequest
 from kivy.app import App
 import certifi
 from kivy.clock import Clock
-
 class SearchPopupMenu(MDInputDialog):
     title = 'Quelle école?'
     text_button_ok = 'On y va'
@@ -40,7 +39,7 @@ class SearchPopupMenu(MDInputDialog):
          mapview.center_on(latitude, longitude)
 
     def error(self, urlrequest, result):
-         print("error")
+         print("error" )
          print(result)
 
     def failure(self, urlrequest, result):
