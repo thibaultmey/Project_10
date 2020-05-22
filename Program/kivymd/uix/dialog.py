@@ -1,6 +1,17 @@
 """
 Dialog
-
+======
+Copyright (c) 2015 Andrés Rodríguez and KivyMD contributors -
+    KivyMD library up to version 0.1.2
+Copyright (c) 2019 Ivanov Yuri and KivyMD contributors -
+    KivyMD library version 0.1.3 and higher
+For suggestions and questions:
+<kivydevelopment@gmail.com>
+This file is distributed under the terms of the same license,
+as the Kivy framework.
+`Material Design spec, Dialogs <https://material.io/design/components/dialogs.html>`_
+Example
+-------
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.factory import Factory
@@ -107,35 +118,36 @@ Builder.load_string(
     padding: dp(0), dp(0), dp(10), dp(0)
 <ListMDDialog>
     title: ""
+    halign : "center"
     BoxLayout:
         orientation: 'vertical'
-        padding: dp(15)
+        padding: 0,60,0,0
         spacing: dp(10)
-
+    
         MDLabel:
             id: title
             text: root.title
-            font_style: 'H6'
-            halign: 'left' if not root.device_ios else 'center'
+            font_style: 'H5'
+            halign: 'center'
             valign: 'top'
             size_hint_y: None
             text_size: self.width, None
             height: self.texture_size[1]
-
+    
         ScrollView:
             id: scroll
             size_hint_y: None
             height:
                 root.height - (title.height + dp(48)\
                 + sep.height)
-
+    
             canvas:
                 Rectangle:
                     pos: self.pos
                     size: self.size
                     #source: '{}dialog_in_fade.png'.format(images_path)
                     source: '{}transparent.png'.format(images_path)
-
+    
             MDList:
                 id: list_layout
                 size_hint_y: None
@@ -150,22 +162,20 @@ Builder.load_string(
                 
                 ThinBox:
                     ThinLabel:
-                        text: "Lieu: "
+                        text: "Lieu"
                     ThinLabel:
                         text: root.Lieu
-                
                 ThinBox:
                     ThinLabel:
-                        text: "Description: "
+                        text: "Description"
                     ThinLabel:
                         text: root.Description
                 ThinBox:
                     ThinLabel:
-                        text: "Payant: "
+                        text: "Payant ou pas?"
                     ThinLabel:
                         text: root.Payant
-                
- 
+
         MDSeparator:
             id: sep
 <ContentMDDialog>
@@ -319,9 +329,11 @@ class BaseDialog(ThemableBehavior, ModalView):
 
 
 class ListMDDialog(BaseDialog):
-    Nom = StringProperty("Missing data")
+    Lieu = StringProperty("Missing data")
     Description = StringProperty("Missing data")
+    categorie = StringProperty("Missing data")
     Payant = StringProperty("Missing data")
+
     background = StringProperty('{}ios_bg_mod.png'.format(images_path))
 
 
@@ -345,7 +357,6 @@ class MDInputDialog(BaseDialog):
         )
         self.add_widget(self.content_dialog)
         self.set_content(self.content_dialog)
-
 
     def set_field_focus(self, interval):
         self.text_field.focus = True
